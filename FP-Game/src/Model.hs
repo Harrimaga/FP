@@ -2,37 +2,46 @@
 --   which represent the state of the game
 module Model where
 
-data InfoToShow = ShowNothing
-                | ShowANumber Int
-                | ShowAChar   Char
-                | ShowObject Player
-
-nO_SECS_BETWEEN_CYCLES :: Float
-nO_SECS_BETWEEN_CYCLES = 5
+import Graphics.Gloss
+import Graphics.Gloss.Interface.IO.Game
+import Type
 
 data GameState = GameState {
-                   infoToShow  :: InfoToShow
-                 , elapsedTime :: Float
+                   player :: Player,
+                   elapsedTime :: Float,
+                   keyState :: [KeyState]
                  }
 
-initialState :: GameState
-initialState = GameState ShowNothing 0
-
 playState :: GameState
-playState = GameState (ShowObject (Player 1 1 1 (Location 0 0))) 0
+playState = GameState (Player 1 (Point 0 0) 1 (Point 0 0)) 0 [Up,Up,Up,Up]
 
-data Location = Location { myX :: Float, myY :: Float}
+data Pos = Point Float Float
 
 data Player = Player {
-                    health :: Int,
-                    speed :: Float,
-                    damage :: Int,
-                    playerLocation :: Location
+                    playerHealth :: Int,
+                    playerSpeed :: Pos,
+                    playerDamage :: Int,
+                    playerLocation :: Pos
 }
 
+instance Move Player where
+  movement a = newLocation a
+    where newLocation :: Player -> Player
+          newLocation Player {playerLocation = (Point c d), playerSpeed = (Point x y)} = a {playerLocation = Point (c + x) (d + y)}
+
+instance Draw Player where
+  draw Player {playerLocation = (Point a b)} = translate (a + 20) (b - 40) (color red (rectangleSolid 20 20))
+
+
+data Enemy = Enemy {
+                  enemyHealth :: Int,
+                  enemySpeed :: Float,
+                  enemyDamage :: Int,
+                  enemyLocation :: Pos
+}
 data Tile = Tile {
-                tileObject :: InfoToShow,
-                tileLocation :: Location
+                tileObject :: Char,
+                tileLocation :: Pos
 }
 
-type Level = [[Tile]]
+type Leveldata = [[Tile]]
