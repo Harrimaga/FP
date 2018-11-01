@@ -1,0 +1,11 @@
+Installing library in D:\Haskell\Game_Repo\FP-Game\.cabal-sandbox\x86_64-windows-ghc-8.4.3\random-1.1-9LLJAJa4iQFLJiLXBOBXBV
+.hs, dist\dist-sandbox-b8219734\build\System\Random.o )
+
+System\Random.hs:43:1: warning: [-Wtabs]
+    Tab character found here, and in 74 further locations.
+    Please use spaces instead.
+   |
+43 |         (
+   | ^^^^^^^^
+ignoring (possibly broken) abi-depends field for packages
+cabal: Leaving directory 'C:\Users\Jeffrey\AppData\Local\Temp\cabal-tmp-6424\random-1.1'
