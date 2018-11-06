@@ -7,7 +7,7 @@ import View
 import Graphics.Gloss.Interface.IO.Game
 
 main :: IO ()
-main = playIO (InWindow "Counter" (400, 400) (560, 200)) -- Or FullScreen
+main = playIO (InWindow "Counter" (600, 600) (460, 100)) -- Or FullScreen
               (makeColor 0.6 0.6 1 1)            -- Background color
               30                                 -- Frames per second
               playState                       -- Initial state
